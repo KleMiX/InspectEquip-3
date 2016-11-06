@@ -11,6 +11,7 @@
 	<Include file="Libs\AceGUI-3.0\AceGUI-3.0.xml"/>
 	<Include file="Libs\AceConfig-3.0\AceConfig-3.0.xml"/>
 	<Include file="Libs\LibBabble-Zone-3.0\lib.xml"/>
+	<Include file="Libs\LibBabble-SubZone-3.0\lib.xml"/>
 	<Include file="Libs\LibBabble-Boss-3.0\lib.xml"/>
 	<Include file="Libs\LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.xml"/>
 
