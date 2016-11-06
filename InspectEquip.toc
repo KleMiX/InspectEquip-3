@@ -1,0 +1,25 @@
+## Interface: 60000
+## Title: InspectEquip
+## Notes: Shows where the equipment of inspected users or yourself is from.
+## Notes-deDE: Zeigt an, wo die Ausrüstung betrachteter Spieler (oder deine eigene) her ist.
+## Author: emelio
+## Version: 2.0.9
+## OptionalDeps: Ace3, LibBabble-Zone-3.0, LibBabble-Boss-3.0, LibItemUpgradeInfo-1.0, Examiner, Outfitter, Links, LinkWrangler, AtlasLoot
+## SavedVariables: InspectEquipConfig, InspectEquipLocalDB
+## X-WoWI-ID: 9509
+## X-Curse-Packaged-Version: 2.0.9
+## X-Curse-Project-Name: InspectEquip
+## X-Curse-Project-ID: inspect-equip
+## X-Curse-Repository-ID: wow/inspect-equip/mainline
+
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+Locales\Locales.xml
+
+ItemSources.lua
+InfoWindow.xml
+Core.lua
+Tooltips.lua
+LocalDatabase.lua
