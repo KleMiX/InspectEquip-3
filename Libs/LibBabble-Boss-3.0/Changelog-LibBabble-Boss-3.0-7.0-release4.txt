@@ -1,0 +1,25 @@
+------------------------------------------------------------------------
+r443 | nevcairiel | 2016-08-14 07:39:40 +0000 (Sun, 14 Aug 2016) | 1 line
+Changed paths:
+   A /tags/7.0-release4 (from /trunk:442)
+
+Weekly Tag - #4
+------------------------------------------------------------------------
+r442 | nevcairiel | 2016-08-14 07:38:49 +0000 (Sun, 14 Aug 2016) | 1 line
+Changed paths:
+   M /trunk/LibBabble-Boss-3.0.lua
+
+Automated LibBabble re-generation from the localization system
+------------------------------------------------------------------------
+r440 | nevcairiel | 2016-07-31 21:08:33 +0000 (Sun, 31 Jul 2016) | 1 line
+Changed paths:
+   M /trunk/LibBabble-Boss-3.0.lua
+
+Automated LibBabble re-generation from the localization system
+------------------------------------------------------------------------
+r438 | nevcairiel | 2016-07-19 07:13:19 +0000 (Tue, 19 Jul 2016) | 1 line
+Changed paths:
+   M /trunk/LibBabble-Boss-3.0.toc
+
+Update for 7.0
+------------------------------------------------------------------------
