@@ -813,7 +813,9 @@ InspectEquip_ItemSources = {
 		[704] = BB["Ana-Mouz"] or "Ana-Mouz",
 		[705] = BB["Flotsam"] or "Flotsam",
 		[706] = BB["Withered J'im"] or "Withered J'im",
-		
+		[707] = BB["Odyn"] or "Odyn",
+		[708] = BB["Helya"] or "Helya",
+		[709] = BB["Guarm"] or "Guarm",
 	},
 	Items = {
 		[647] = "w",
