@@ -105,7 +105,9 @@ InspectEquip_ItemSources = {
 		[100] = BZ["Heart of Fear"] or "Heart of Fear",
 		[101] = BZ["Throne of Thunder"] or "Throne of Thunder",
 		[102] = BZ["Siege of Orgrimmar"] or "Siege of Orgrimmar",
+		
 	},
+	
 	Bosses = {
 		[1] = BB["Ingvar the Plunderer"] or "Ingvar the Plunderer",
 		[2] = BB["Prince Keleseth"] or "Prince Keleseth",
