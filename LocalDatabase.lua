@@ -13,6 +13,7 @@ local max = math.max
 -- check for 5.0+ client, because EJ api was changed
 local mop = select(4, GetBuildInfo()) >= 50000
 local wod = select(4, GetBuildInfo()) >= 60000
+local legion = select(4, GetBuildInfo()) >= 70000
 
 -- Database
 InspectEquipLocalDB = {}
