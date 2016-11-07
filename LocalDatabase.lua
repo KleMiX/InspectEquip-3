@@ -371,7 +371,13 @@ local function UpdateFunction(recursive)
 				EJ_SelectInstance(insID)
 				local diff
 				local difficulties
-				if wod then
+				if legion then
+					if isRaid then
+						difficulties = {3, 4, 5, 6, 7, 14, 15, 16, 17}
+					else
+						difficulties = {1, 2, 8}
+					end
+				elseif wod then
 					if isRaid then
 						difficulties = {3, 4, 5, 6, 7, 14, 15, 16, 17}
 					else
