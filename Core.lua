@@ -480,7 +480,7 @@ function IE:Inspect(unit, entry)
 				local _,_,rar,ilvl = GetItemInfo(itemLink)
 				if rar and rar >= 2 then
 					if rar == 6 then
-						source = {L["Artifact"]}
+						source = {L["Artifact"] or "Artifact"}
 					else
 						source = {L["Unknown"]}
 					end
@@ -514,6 +514,16 @@ function IE:Inspect(unit, entry)
 				-- add item to category
 				cat.hasItems = true
 				cat.items[cat.count] = {link = itemLink, enchant = enchantId, slot = slot}
+
+				if isArtifact then -- add artifact relics to the list
+					for rs = 1, 3 do
+						local reliclink = select(2, GetItemGem(itemLink, rs))
+						if reliclink then
+							cat.count = cat.count + 1
+							cat.items[cat.count] = {link = reliclink, enchant = nil, slot = slot}
+						end
+					end
+				end
 			end
 
 			-- calculate avg ilvl
@@ -717,7 +727,7 @@ function IE.Line_OnEnter(row)
 			GameTooltip:SetPoint("BOTTOMLEFT", row, "TOPLEFT")
 		end
 		if (not cached) and (UnitName(curUnit) == curUnitName) then
-			row.link = GetInventoryItemLink(curUnit, GetInventorySlotInfo(row.item.slot)) or row.link
+			row.link = row.link or GetInventoryItemLink(curUnit, GetInventorySlotInfo(row.item.slot))
 		end
 		GameTooltip:SetHyperlink(row.link)
 		if row.item and InspectEquipConfig.checkEnchants and (row.item.enchant == 0) and (not noEnchantWarningSlots[row.item.slot]) then
