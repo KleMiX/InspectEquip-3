@@ -1,9 +1,9 @@
 ## Interface: 70100
-## Title: InspectEquip
+## Title: InspectEquip 3
 ## Notes: Shows where the equipment of inspected users or yourself is from.
 ## Notes-deDE: Zeigt an, wo die Ausrüstung betrachteter Spieler (oder deine eigene) her ist.
-## Author: emelio, gOOvER, 
-## Version: 3.0.0
+## Author: emelio, gOOvER, KleMiX
+## Version: 3.0.1
 ## OptionalDeps: Ace3, LibBabble-Zone-3.0, LibBabble-Boss-3.0, LibItemUpgradeInfo-1.0, Examiner, Outfitter, Links, LinkWrangler, AtlasLoot
 ## SavedVariables: InspectEquipConfig, InspectEquipLocalDB
 
