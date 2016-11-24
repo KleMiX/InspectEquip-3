@@ -75,4 +75,6 @@ L["World drops"] = "Drops del Mundo"
 L["World events"] = "Eventos mundiales"
 L["World PvP"] = "JcJ en el mundo"
 L["Wrath of the Lich King"] = "Wrath of the Lich King"
-
+--L["Artifact"] = ""
+--L["Show artifact relics in equipment list"] = ""
+--L["Show the relics of artifact weapon in the equipment panel"] = ""

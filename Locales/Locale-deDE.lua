@@ -74,6 +74,6 @@ L["World drops"] = "Weltdrops"
 L["World events"] = "Weltereignisse"
 L["World PvP"] = "Welt PvP"
 L["Wrath of the Lich King"] = "Wrath of the Lich King"
-
-
-
+--L["Artifact"] = ""
+--L["Show artifact relics in equipment list"] = ""
+--L["Show the relics of artifact weapon in the equipment panel"] = ""

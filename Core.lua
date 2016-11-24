@@ -70,6 +70,7 @@ local defaults = {
 	checkEnchants = true,
 	listItemLevels = true,
 	showAvgItemLevel = true,
+	showArtifactRelics = true,
 	ttR = 1.0,
 	ttG = 0.75,
 	ttB = 0.0,
@@ -129,8 +130,15 @@ local options = {
 			get = function() return InspectEquipConfig.showAvgItemLevel end,
 			set = function(_,v) InspectEquipConfig.showAvgItemLevel = v end,
 		},
+		showartifactrelics = {
+			order = 8, type = "toggle", width = "full",
+			name = L["Show artifact relics in equipment list"],
+			desc = L["Show the relics of artifact weapon in the equipment panel"],
+			get = function() return InspectEquipConfig.showArtifactRelics end,
+			set = function(_,v) InspectEquipConfig.showArtifactRelics = v end,
+		},
 		tooltipcolor = {
-			order = 8, type = "color",
+			order = 9, type = "color",
 			name = L["Tooltip text color"],
 			width = "full",
 			get = function() return InspectEquipConfig.ttR, InspectEquipConfig.ttG, InspectEquipConfig.ttB, 1.0 end,
@@ -141,7 +149,7 @@ local options = {
 			end,
 		},
 		maxsourcecount = {
-			order = 9, type = "range",
+			order = 10, type = "range",
 			min = 1, max = 20, softMax = 10, step = 1,
 			width = "double",
 			name = L["Max. amount of sources in tooltips"],
@@ -150,7 +158,7 @@ local options = {
 			set = function(_,v) InspectEquipConfig.maxSourceCount = v end,
 		},
 		database = {
-			order = 10, type = "group", inline = true,
+			order = 11, type = "group", inline = true,
 			name = L["Database"],
 			args = {
 				resetdb = {
@@ -464,6 +472,7 @@ function IE:Inspect(unit, entry)
 	end
 
 	local calciv = InspectEquipConfig.showAvgItemLevel
+	local showRelics = InspectEquipConfig.showArtifactRelics
 	local iLevelSum, iCount = 0,0
 
 	local artifactLevel = 0
@@ -480,7 +489,7 @@ function IE:Inspect(unit, entry)
 				local _,_,rar,ilvl = GetItemInfo(itemLink)
 				if rar and rar >= 2 then
 					if rar == 6 then
-						source = {L["Artifact"] or "Artifact"}
+						source = {L["Artifact"]}
 					else
 						source = {L["Unknown"]}
 					end
@@ -515,7 +524,7 @@ function IE:Inspect(unit, entry)
 				cat.hasItems = true
 				cat.items[cat.count] = {link = itemLink, enchant = enchantId, slot = slot}
 
-				if isArtifact then -- add artifact relics to the list
+				if isArtifact and showRelics then -- add artifact relics to the list
 					for rs = 1, 3 do
 						local reliclink = select(2, GetItemGem(itemLink, rs))
 						if reliclink then

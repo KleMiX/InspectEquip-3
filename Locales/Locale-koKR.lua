@@ -75,4 +75,6 @@ L["World drops"] = "월드 드롭"
 L["World events"] = "월드 이벤트"
 L["World PvP"] = "야외 PvP"
 L["Wrath of the Lich King"] = "리치왕의 분노"
-
+--L["Artifact"] = ""
+--L["Show artifact relics in equipment list"] = ""
+--L["Show the relics of artifact weapon in the equipment panel"] = ""
