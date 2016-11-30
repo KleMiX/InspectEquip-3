@@ -1,0 +1,7 @@
+------------------------------------------------------------------------
+r444 | nevcairiel | 2016-10-15 14:36:20 +0000 (Sat, 15 Oct 2016) | 1 line
+Changed paths:
+   M /trunk/LibBabble-Boss-3.0.lua
+
+Automated LibBabble re-generation from the localization system
+------------------------------------------------------------------------

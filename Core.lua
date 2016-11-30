@@ -9,8 +9,6 @@ local TITLE = InspectEquip_InfoWindowTitle
 local AVGIL = InspectEquip_InfoWindowAvgItemLevel
 local exMod = nil
 
-local mop = select(4, GetBuildInfo()) >= 50000
-
 local ItemUpgradeInfo = LibStub("LibItemUpgradeInfo-1.0")
 
 local slots = { "HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot",
@@ -18,8 +16,7 @@ local slots = { "HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot",
 				"Finger0Slot", "Finger1Slot", "Trinket0Slot", "Trinket1Slot", "MainHandSlot",
 				"SecondaryHandSlot" } -- TabardSlot, ShirtSlot
 local noEnchantWarningSlots = {
-	["NeckSlot"] = true, ["WaistSlot"] = true, ["Finger0Slot"] = true, ["Finger1Slot"] = true,
-	["Trinket0Slot"] = true, ["Trinket1Slot"] = true, ["SecondaryHandSlot"] = true, ["RangedSlot"] = true,
+	["NeckSlot"] = true, ["Finger0Slot"] = true, ["Finger1Slot"] = true,["BackSlot"] = true,["ShoulderSlot"] = true,
 }
 
 local lines = {}
@@ -51,13 +48,6 @@ local Examiner = Examiner
 
 local tooltipTimer = nil
 local retryTimer = nil
-
-if mop then
-	noEnchantWarningSlots["HeadSlot"] = true
-else
-	tinsert(slots, "RangedSlot")
-end
-
 
 --------------------------------------------------------------------------------------
 
@@ -488,7 +478,9 @@ function IE:Inspect(unit, entry)
 			if (not source) and InspectEquipConfig.showUnknown then
 				local _,_,rar,ilvl = GetItemInfo(itemLink)
 				if rar and rar >= 2 then
-					if rar == 6 then
+					if rar ==5 then
+						source = {L["Legendary"]}
+					elseif rar == 6 then
 						source = {L["Artifact"]}
 					else
 						source = {L["Unknown"]}
@@ -537,7 +529,8 @@ function IE:Inspect(unit, entry)
 
 			-- calculate avg ilvl
 			if calciv then
-				local lvl = ItemUpgradeInfo:GetUpgradedItemLevel(itemLink)
+				--local lvl = ItemUpgradeInfo:GetUpgradedItemLevel(itemLink)
+				local lvl = GetDetailedItemLevelInfo(itemLink)
 
 				if lvl then
 
@@ -562,7 +555,7 @@ function IE:Inspect(unit, entry)
 	end
 
 	if itemsFound then
-		self:AddCategory(items, 0)
+		self:AddCategory(items, 0, artifactLevel)
 		if calciv and iCount > 0 then
 			iLevelSum = iLevelSum + artifactLevel * artifactCount
 			iCount = iCount + artifactCount
@@ -584,10 +577,10 @@ function IE:Inspect(unit, entry)
 	end
 end
 
-function IE:AddCategory(cat, padding)
+function IE:AddCategory(cat, padding, artifactLevel)
 	-- add items
 	if cat.hasItems then
-		self:AddItems(cat.items, padding+1)
+		self:AddItems(cat.items, padding+1, artifactLevel)
 	end
 
 	-- sort subcategories by item count
@@ -602,21 +595,35 @@ function IE:AddCategory(cat, padding)
 		local name = t[i].name
 		local subcat = t[i].subcat
 		self:AddLine(padding, name .. " (" .. subcat.count .. ")")
-		self:AddCategory(subcat, padding+1)
+		self:AddCategory(subcat, padding+1, artifactLevel)
 	end
 end
 
-function IE:AddItems(tab, padding)
+function IE:AddItems(tab, padding, artifactLevel)
 	for _, item in pairs(tab) do
 		local suffix = ""
 		local prefix = ""
+		local isArtifact = false
+
 		if InspectEquipConfig.listItemLevels then
-			local ilvl = ItemUpgradeInfo:GetUpgradedItemLevel(item.link)
+			--local ilvl = ItemUpgradeInfo:GetUpgradedItemLevel(item.link)
+			local ilvl = GetDetailedItemLevelInfo(item.link)
+
+			if item.slot == "MainHandSlot" then
+				isArtifact = ItemUpgradeInfo:IsArtifact(item.link)
+			end
+			if item.slot == "SecondaryHandSlot" then
+				isArtifact = ItemUpgradeInfo:IsArtifact(item.link)
+			end
+			if isArtifact then
+				ilvl = artifactLevel
+			end
+
 			if ilvl then
 				prefix = "|cffaaaaaa[" .. ilvl .. "]|r "
 			end
 		end
-		if InspectEquipConfig.checkEnchants and (item.enchant == 0) and (not noEnchantWarningSlots[item.slot]) then
+		if InspectEquipConfig.checkEnchants and (item.enchant == nil) and noEnchantWarningSlots[item.slot] then
 			suffix = "|cffff0000*|r"
 		end
 		self:AddLine(padding, prefix .. item.link .. suffix, item.link, item)
@@ -739,7 +746,7 @@ function IE.Line_OnEnter(row)
 			row.link = row.link or GetInventoryItemLink(curUnit, GetInventorySlotInfo(row.item.slot))
 		end
 		GameTooltip:SetHyperlink(row.link)
-		if row.item and InspectEquipConfig.checkEnchants and (row.item.enchant == 0) and (not noEnchantWarningSlots[row.item.slot]) then
+		if row.item and InspectEquipConfig.checkEnchants and (row.item.enchant == nil) and noEnchantWarningSlots[row.item.slot] then
 			GameTooltip:AddLine(" ")
 			GameTooltip:AddLine("|cffff0000" .. L["Item is not enchanted"] .. "|r")
 		end

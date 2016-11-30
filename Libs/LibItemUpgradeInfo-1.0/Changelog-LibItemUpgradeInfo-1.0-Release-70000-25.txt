@@ -1,0 +1,11 @@
+tag Release-70000-25
+49dcbf73210365cf42831a19843c97935d7a039f
+ggargani <giovanni@gargani.it>
+2016-10-03 22:53:58 +0200
+
+New IsArtifact method
+
+--------------------
+
+ggargani:
+	- Added method IsArtifact

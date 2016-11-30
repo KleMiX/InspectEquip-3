@@ -24,6 +24,7 @@ local MAX_WC = 5
 local DATA_RECEIVED_WC = 7
 
 local newDataReceived
+local newDataCycles = 0
 local dbInitialized = false
 
 -- GUI
@@ -129,7 +130,7 @@ local function UpdateTick()
 			newDataCycles = newDataCycles + DATA_RECEIVED_WC
 			newDataReceived = false
 		end
-		if newDataCycles and newDataCycles > 0 then
+		if newDataCycles > 0 then
 			newDataCycles = newDataCycles - 1
 			return
 		end
@@ -162,6 +163,9 @@ local function DifficultyToMode(diff, raid)
 	elseif diff == 2 then
 		-- 5 heroic
 		return 1
+	elseif diff == 23 then
+		-- 5 mythic
+		return 3
 	elseif diff == 3 then
 		-- 10 normal
 		return 8
@@ -375,13 +379,13 @@ local function UpdateFunction(recursive)
 					if isRaid then
 						difficulties = {3, 4, 5, 6, 7, 14, 15, 16, 17}
 					else
-						difficulties = {1, 2, 8}
+						difficulties = {1, 2, 8, 23}
 					end
 				elseif wod then
 					if isRaid then
 						difficulties = {3, 4, 5, 6, 7, 14, 15, 16, 17}
 					else
-						difficulties = {1, 2, 8}
+						difficulties = {1, 2, 8, 23}
 					end
 				elseif mop then
 					if isRaid then
