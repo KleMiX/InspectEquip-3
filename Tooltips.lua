@@ -78,6 +78,8 @@ addSource = function(tip, item, source, level)
 					str = str .. " (" .. L["Heroic"] .. ")"
 				elseif mode == 2 then
 					str = str .. " (" .. L["Normal"] .. ")"
+				elseif mode == 3 then
+					str = str .. " (" .. PLAYER_DIFFICULTY6 .. ")"
 				end
 			end
 		end
@@ -285,4 +287,3 @@ function IE:HookTooltips()
 		end, "item")
 	end
 end
-
