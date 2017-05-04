@@ -49,6 +49,8 @@ local Examiner = Examiner
 local tooltipTimer = nil
 local retryTimer = nil
 
+local lastInspectedUnit = nil
+
 --------------------------------------------------------------------------------------
 
 InspectEquipConfig = {}
@@ -331,6 +333,11 @@ function IE:GetExaminerCache(unit)
 end
 
 function IE:InspectUnit(unit, ...)
+	if lastInspectedUnit == unit then
+	end
+
+	lastInspectedUnit = unit
+
 	origInspectUnit(unit, ...)
 
 	if InspectEquipConfig.inspectWindow then
@@ -343,6 +350,7 @@ function IE:InspectUnit(unit, ...)
 
 		self:Inspect(unit)
 	end
+
 end
 
 function IE:InspectFrame_UnitChanged()
