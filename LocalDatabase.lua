@@ -82,6 +82,12 @@ local function createUpdateGUI()
 	barText:SetTextColor(1, 1, 1)
 	barText:SetText("InspectEquip: " .. L["Updating database..."])
 
+	bar:SetMovable(true)
+	bar:EnableMouse(true)
+	bar:RegisterForDrag("LeftButton")
+	bar:SetScript("OnDragStart", function() bar:StartMoving() end)
+	bar:SetScript("OnDragStop", function() bar:StopMovingOrSizing() end)
+
 end
 
 local ejDisabled = false
