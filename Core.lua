@@ -334,6 +334,7 @@ end
 
 function IE:InspectUnit(unit, ...)
 	if lastInspectedUnit == unit then
+		return -- some addons will enforce unit change on inspect and we can go recursively back here and explode in stack overflow
 	end
 
 	lastInspectedUnit = unit
@@ -351,6 +352,7 @@ function IE:InspectUnit(unit, ...)
 		self:Inspect(unit)
 	end
 
+	lastInspectedUnit = nil -- just reset asap, since this is just a measure to not recurse, which will be completed by now
 end
 
 function IE:InspectFrame_UnitChanged()
