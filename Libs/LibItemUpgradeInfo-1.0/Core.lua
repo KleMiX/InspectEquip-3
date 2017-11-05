@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibItemUpgradeInfo-1.0", 28
+local MAJOR, MINOR = "LibItemUpgradeInfo-1.0", 29
 local type,tonumber,select,strsplit,GetItemInfoFromHyperlink=type,tonumber,select,strsplit,GetItemInfoFromHyperlink
 local library,previous = _G.LibStub:NewLibrary(MAJOR, MINOR)
 local lib=library --#lib Needed to keep Eclipse LDT happy
@@ -19,18 +19,18 @@ Caching system
 3	itemRarity	Number	The quality of the item. The value is 0 to 7, which represents Poor to Heirloom. This appears to include gains from upgrades/bonuses.
 4	itemLevel	Number	The item level of this item, not including item levels gained from upgrades. There is currently no API to get the item level including upgrades/bonuses.
 5	itemMinLevel	Number	The minimum level required to use the item, 0 meaning no level requirement.
-6	itemType	String	The type of the item: Armor, Weapon, Quest, Key, etc. (localized)
-7	itemSubType	String	The sub-type of the item: Enchanting, Cloth, Sword, etc. See itemType. (localized)
+6	itemType	String	The type of the item: Armor, Weapon, Quest, Key, etc.
+7	itemSubType	String	The sub-type of the item: Enchanting, Cloth, Sword, etc. See itemType.
 8	itemStackCount	Number	How many of the item per stack: 20 for Runecloth, 1 for weapon, 100 for Alterac Ram Hide, etc.
 9	itemEquipLoc	String	The type of inventory equipment location in which the item may be equipped, or "" if it can't be equippable. The string returned is also the name of a global string variable e.g. if "INVTYPE_WEAPONMAINHAND" is returned, _G["INVTYPE_WEAPONMAINHAND"] will be the localized, displayable name of the location.
 10	iconFileDataID	Number	The FileDataID for the icon texture for the item.
 11	itemSellPrice	Number	The price, in copper, a vendor is willing to pay for this item, 0 for items that cannot be sold.
 12	itemClassID	Number	This is the numerical value that determines the string to display for 'itemType'.
 13	itemSubClassID	Number	This is the numerical value that determines the string to display for 'itemSubType'
-14 ? number
-15 expansionId
-16 ? ?
-17 ? boolean
+14	bindType	Number	Item binding type: 0 - none; 1 - on pickup; 2 - on equip; 3 - on use; 4 - quest.
+15	expacID	Number
+16	itemSetID	Number
+17	isCraftingReagent bool
 --]]
 -- ItemLink Constants
 local i_Name=1
