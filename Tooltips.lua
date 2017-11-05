@@ -105,6 +105,10 @@ addSource = function(tip, item, source, level)
 					if not is52 then
 						curTexture = "Interface\\Icons\\" .. curTexture
 					end
+					if not curTexture then
+						curTexture = unknownIcon
+					end
+
 					str = str .. "|T" .. curTexture .. ":0|t " .. cost .. " " .. curName .. " "
 				elseif typ == "i" then
 					-- item
