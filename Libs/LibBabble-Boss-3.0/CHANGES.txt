@@ -1,9 +1,9 @@
 ------------------------------------------------------------------------
-r446 | h.leppkes@gmail.com | 2017-04-05 13:42:54 -0500 (Wed, 05 Apr 2017) | 1 line
+r452 | nevcairiel | 2018-07-17 13:01:55 +0000 (Tue, 17 Jul 2018) | 1 line
 Changed paths:
    M /trunk/LibBabble-Boss-3.0.lua
    M /trunk/LibBabble-Boss-3.0.toc
 
-Update for 7.2
+Update for 8.0
 ------------------------------------------------------------------------
 
