@@ -16,7 +16,7 @@ local slots = { "HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot",
 				"Finger0Slot", "Finger1Slot", "Trinket0Slot", "Trinket1Slot", "MainHandSlot",
 				"SecondaryHandSlot" } -- TabardSlot, ShirtSlot
 local noEnchantWarningSlots = {
-	["NeckSlot"] = true, ["Finger0Slot"] = true, ["Finger1Slot"] = true,["BackSlot"] = true,["ShoulderSlot"] = true,
+	["MainHandSlot"] = true, ["Finger0Slot"] = true, ["Finger1Slot"] = true,
 }
 
 local lines = {}
