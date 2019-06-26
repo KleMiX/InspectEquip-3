@@ -634,7 +634,8 @@ function IE:AddItems(tab, padding, artifactLevel)
 			end
 		end
 		if InspectEquipConfig.checkEnchants and (item.enchant == nil) and noEnchantWarningSlots[item.slot] then
-			suffix = "|cffff0000*|r"
+			suffix = "|cffff0000[*]|r"
+			prefix = prefix .. suffix .. " "
 		end
 		self:AddLine(padding, prefix .. item.link .. suffix, item.link, item)
 	end
