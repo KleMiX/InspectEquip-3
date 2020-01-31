@@ -60,6 +60,7 @@ local defaults = {
 	inspectWindow = true,
 	charWindow = true,
 	checkEnchants = true,
+	checkSockets = true,
 	listItemLevels = true,
 	showAvgItemLevel = true,
 	showArtifactRelics = true,
@@ -161,6 +162,13 @@ local options = {
 					func = function() IE:CreateLocalDatabase() end,
 				},
 			},
+		},
+		checksocketts = {
+			order = 12, type = "toggle", width = "full",
+			name = L["Check for missing gems"],
+			desc = L["Display a warning for items with missing gems"],
+			get = function() return InspectEquipConfig.checkSockets end,
+			set = function(_,v) InspectEquipConfig.checkSockets = v end,
 		}
 	},
 }
@@ -169,6 +177,46 @@ LibStub("AceConfig-3.0"):RegisterOptionsTable("InspectEquip", options, "/inspect
 LibStub("AceConfigDialog-3.0"):AddToBlizOptions("InspectEquip")
 
 --------------------------------------------------------------------------------------
+
+-- taken from https://www.wowinterface.com/forums/showpost.php?p=319704&postcount=2
+local GetNumSockets
+do
+	-- Generate a unique name for the tooltip:
+	local tooltipName = "PhanxScanningTooltip" .. random(100000, 10000000)
+
+	-- Create the hidden tooltip object:
+	local tooltip = CreateFrame("GameTooltip", tooltipName, UIParent, "GameTooltipTemplate")
+	tooltip:SetOwner(UIParent, "ANCHOR_NONE")
+
+	-- Build a list of the tooltip's texture objects:
+	local textures = {}
+	for i = 1, 10 do
+		textures[i] = _G[tooltipName .. "Texture" .. i]
+	end
+
+	-- Set up scanning and caching:
+	local numSocketsFromLink = setmetatable({}, { __index = function(t, link)
+		-- Send the link to the tooltip:
+		tooltip:SetHyperlink(link)
+
+		-- Count how many textures are shown:
+		local n = 0
+		for i = 1, 10 do
+			if textures[i]:IsShown() then
+				n = n + 1
+			end
+		end
+
+		-- Cache and return the count for this link:
+		t[link] = n
+		return n
+	end })
+
+	-- Expose the API:
+	function GetNumSockets(link)
+		return link and numSocketsFromLink[link]
+	end
+end
 
 function IE:OnInitialize()
 	setmetatable(InspectEquipConfig, {__index = defaults})
@@ -511,6 +559,10 @@ function IE:Inspect(unit, entry)
 				local enchantId = tonumber(itemLink:match("Hitem:%d+:(%d+):"))
 				itemsFound = true
 
+				local _, _, _, gem1, gem2, gem3, gem4 = strsplit(":", strmatch(itemLink, "|H(.-)|h"))
+				local numFilledSockets = (tonumber(gem1) or 0) + (tonumber(gem2) or 0) + (tonumber(gem3) or 0) + (tonumber(gem4) or 0)
+				local unsocketedCount = GetNumSockets(itemLink) - numFilledSockets
+
 				-- find category
 				local cat = items
 				local entry
@@ -524,7 +576,7 @@ function IE:Inspect(unit, entry)
 
 				-- add item to category
 				cat.hasItems = true
-				cat.items[cat.count] = {link = itemLink, enchant = enchantId, slot = slot}
+				cat.items[cat.count] = {link = itemLink, enchant = enchantId, slot = slot, unsocketedCount = unsocketedCount}
 
 				if isArtifact and showRelics then -- add artifact relics to the list
 					for rs = 1, 3 do
@@ -634,8 +686,16 @@ function IE:AddItems(tab, padding, artifactLevel)
 			end
 		end
 		if InspectEquipConfig.checkEnchants and (item.enchant == nil) and noEnchantWarningSlots[item.slot] then
-			suffix = "|cffff0000[*]|r"
-			prefix = prefix .. suffix .. " "
+			suffix = suffix .. "|cffff0000[*]|r"
+			prefix = prefix .. suffix
+		end
+		if InspectEquipConfig.checkSockets and (item.unsocketedCount > 0) then
+			suffix = suffix .. "|cffff0000[S]|r"
+			prefix = prefix .. suffix
+		end
+		if suffix ~= "" then
+			prefix = prefix .. " "
+			suffix = " " .. suffix
 		end
 		self:AddLine(padding, prefix .. item.link .. suffix, item.link, item)
 	end
@@ -760,6 +820,10 @@ function IE.Line_OnEnter(row)
 		if row.item and InspectEquipConfig.checkEnchants and (row.item.enchant == nil) and noEnchantWarningSlots[row.item.slot] then
 			GameTooltip:AddLine(" ")
 			GameTooltip:AddLine("|cffff0000" .. L["Item is not enchanted"] .. "|r")
+		end
+		if row.item and InspectEquipConfig.checkSockets and (row.item.unsocketedCount > 0) then
+			GameTooltip:AddLine(" ")
+			GameTooltip:AddLine("|cffff0000" .. L["Item is not socketed"] .. "|r")
 		end
 		GameTooltip:Show()
 	end
