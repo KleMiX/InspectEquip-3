@@ -16,7 +16,7 @@ local slots = { "HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot",
 				"Finger0Slot", "Finger1Slot", "Trinket0Slot", "Trinket1Slot", "MainHandSlot",
 				"SecondaryHandSlot" } -- TabardSlot, ShirtSlot
 local noEnchantWarningSlots = {
-	["MainHandSlot"] = true, ["Finger0Slot"] = true, ["Finger1Slot"] = true,
+	["MainHandSlot"] = true, ["SecondaryHandSlot"] = true, ["Finger0Slot"] = true, ["Finger1Slot"] = true,
 }
 
 local lines = {}
@@ -686,8 +686,18 @@ function IE:AddItems(tab, padding, artifactLevel)
 			end
 		end
 		if InspectEquipConfig.checkEnchants and (item.enchant == nil) and noEnchantWarningSlots[item.slot] then
-			suffix = suffix .. "|cffff0000[*]|r"
-			prefix = prefix .. suffix
+			local add = true
+
+			-- check if off hand is a weapon, skip if not
+			if item.slot == "SecondaryHandSlot" then
+				local classID = select(12, GetItemInfo(item.link))
+				add = classID == LE_ITEM_CLASS_WEAPON
+			end
+
+			if add then
+				suffix = suffix .. "|cffff0000[*]|r"
+				prefix = prefix .. suffix
+			end
 		end
 		if InspectEquipConfig.checkSockets and (item.unsocketedCount > 0) then
 			suffix = suffix .. "|cffff0000[S]|r"
