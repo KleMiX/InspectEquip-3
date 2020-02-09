@@ -583,7 +583,7 @@ function IE:Inspect(unit, entry)
 						local reliclink = select(2, GetItemGem(itemLink, rs))
 						if reliclink then
 							cat.count = cat.count + 1
-							cat.items[cat.count] = {link = reliclink, enchant = nil, slot = slot}
+							cat.items[cat.count] = {link = reliclink, enchant = nil, slot = slot, unsocketedCount = 0}
 						end
 					end
 				end
