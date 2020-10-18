@@ -56,7 +56,7 @@ end
 local function createUpdateGUI()
 
 	if not bar then
-		bar = CreateFrame("STATUSBAR", nil, UIParent, "TextStatusBar")
+		bar = CreateFrame("STATUSBAR", nil, UIParent, "TextStatusBar" and BackdropTemplateMixin and "BackdropTemplate")
 	end
 	bar:SetWidth(300)
 	bar:SetHeight(30)
@@ -64,7 +64,7 @@ local function createUpdateGUI()
 	bar:SetBackdrop({
 		bgFile	 = "Interface\\Tooltips\\UI-Tooltip-Background",
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-		tile = 1, tileSize = 10, edgeSize = 10,
+		tile = true, tileSize = 10, edgeSize = 10,
 		insets = {left = 1, right = 1, top = 1, bottom = 1}
 	})
 	bar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
@@ -227,8 +227,22 @@ local function SaveToDB(tempDB, entryType)
 		local str = InspectEquipLocalDB.Items[itemID]
 		local isEntry = IS.Items[itemID]
 
+		if not entryType then
+			entryType = ""
+		end
+
 		-- loop through sources we found
 		for _, entry in pairs(sources) do
+			if not entry[1] then
+				entry[1] = ""
+			end
+			if not entry[2] then
+				entry[2] = ""
+			end
+			if not entry[3] then
+				entry[3] = ""
+			end
+
 			local entryStr = entryType .. "_" .. entry[1] .. "_" .. entry[3] .. "_" .. entry[2]
 
 			-- skip if already in IS DB
@@ -305,6 +319,7 @@ local function UpdateFunction(recursive)
 	else
 		EJ_SetClassLootFilter(0)
 	end
+	C_EncounterJournal.ResetSlotFilter()
 	newDataReceived = false
 	IE:RegisterEvent("EJ_LOOT_DATA_RECIEVED")
 
@@ -442,34 +457,29 @@ local function UpdateFunction(recursive)
 
 						for j = 1, n do
 							-- get item info
-							local itemID, encID, itemName, _, _, _, itemLink = EJ_GetLootInfoByIndex(j)
+							local itemInfo = C_EncounterJournal.GetLootInfoByIndex(j)
+							local encName = nil
 
-							-- wait until data has arrived
-							-- this doesn't seem necessary
-							-- while not itemID do
-							--	coroutine.yield()
-							--	waitCycles = waitCycles + 1
-							--	itemName, _, _, _, itemID, itemLink, encID = EJ_GetLootInfoByIndex(j)
-							-- end
+							if itemInfo.encounterID then
+								encName = EJ_GetEncounterInfo(itemInfo.encounterID)
+							end
 
-							local encName = EJ_GetEncounterInfo(encID)
+							local bossID = nil
 
-							-- if not encName then
-							--	IE:Print("no encounter name! encID = " .. encID)
-							-- end
-
-							-- get boss id for db
-							local bossID = bossMap[encName]
-							if not bossID then
-								-- boss is not in db
-								bossID = db.NextBossID
-								db.Bosses[bossID] = encName
-								bossMap[encName] = bossID
-								db.NextBossID = db.NextBossID + 1
+							if encName then
+								-- get boss id for db
+								bossID = bossMap[encName]
+								if not bossID then
+									-- boss is not in db
+									bossID = db.NextBossID
+									db.Bosses[bossID] = encName
+									bossMap[encName] = bossID
+									db.NextBossID = db.NextBossID + 1
+								end
 							end
 
 							-- add item to db
-							AddToDB(tempDB, itemID, zoneID, bossID, mode)
+							AddToDB(tempDB, itemInfo.itemID, zoneID, bossID, mode)
 						end
 
 					end
