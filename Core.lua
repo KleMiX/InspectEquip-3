@@ -1,6 +1,6 @@
 -- InspectEquip
 
-InspectEquip = LibStub("AceAddon-3.0"):NewAddon("InspectEquip", "AceConsole-3.0", "AceHook-3.0", "AceTimer-3.0", "AceEvent-3.0")
+InspectEquip = LibStub("AceAddon-3.0"):NewAddon("InspectEquip", "AceHook-3.0", "AceTimer-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("InspectEquip")
 local IE = InspectEquip
 local IS = InspectEquip_ItemSources --> ItemSources.lua
