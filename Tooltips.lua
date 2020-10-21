@@ -102,7 +102,12 @@ addSource = function(tip, item, source, level)
 					local currency = tonumber(next_field())
 					local cost = tonumber(next_field())
 					local curInfo = C_CurrencyInfo.GetCurrencyInfo(currency)
-					local curTexture = curInfo.iconFileID
+					local curTexture = nil
+
+					if curInfo then
+						curTexture = curInfo.iconFileID
+					end
+
 					if not is52 then
 						curTexture = "Interface\\Icons\\" .. curInfo.iconFileID
 					end
