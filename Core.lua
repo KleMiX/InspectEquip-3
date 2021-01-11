@@ -5,8 +5,8 @@ local L = LibStub("AceLocale-3.0"):GetLocale("InspectEquip")
 local IE = InspectEquip
 local IS = InspectEquip_ItemSources --> ItemSources.lua
 local WIN = InspectEquip_InfoWindow --> InfoWindow.xml
-local TITLE = InspectEquip_InfoWindowTitle
-local AVGIL = InspectEquip_InfoWindowAvgItemLevel
+local TITLE = InspectEquip_BackdropTitle
+local AVGIL = InspectEquip_BackdropAvgItemLevel
 local exMod = nil
 
 local ItemUpgradeInfo = LibStub("LibItemUpgradeInfo-1.0")
