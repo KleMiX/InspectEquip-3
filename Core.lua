@@ -5,6 +5,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("InspectEquip")
 local IE = InspectEquip
 local IS = InspectEquip_ItemSources --> ItemSources.lua
 local WIN = InspectEquip_InfoWindow --> InfoWindow.xml
+local BACK = InspectEquip_Backdrop --> InfoWindow.xml
 local TITLE = InspectEquip_BackdropTitle
 local AVGIL = InspectEquip_BackdropAvgItemLevel
 local exMod = nil
@@ -811,6 +812,8 @@ function IE:FixWindowSize()
 	end
 	WIN:SetWidth(maxwidth + 40)
 	WIN:SetHeight(height)
+	BACK:SetWidth(maxwidth + 40)
+	BACK:SetHeight(height)
 end
 
 function IE.Line_OnEnter(row)
