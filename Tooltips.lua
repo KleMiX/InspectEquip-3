@@ -106,16 +106,15 @@ addSource = function(tip, item, source, level)
 
 					if curInfo then
 						curTexture = curInfo.iconFileID
-					end
 
-					if not is52 then
-						curTexture = "Interface\\Icons\\" .. curInfo.iconFileID
-					end
-					if not curTexture then
-						curTexture = unknownIcon
-					end
+						if not is52 then
+							curTexture = "Interface\\Icons\\" .. curInfo.iconFileID
+						end
 
-					str = str .. "|T" .. curTexture .. ":0|t " .. cost .. " " .. curInfo.name .. " "
+						str = str .. "|T" .. curTexture .. ":0|t " .. cost .. " " .. curInfo.name .. " "
+					else
+						str = nil -- give up if we don't have currency data
+					end
 				elseif typ == "i" then
 					-- item
 					local subItemId = tonumber(next_field())
