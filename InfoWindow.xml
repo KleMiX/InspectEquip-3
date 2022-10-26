@@ -5,7 +5,7 @@
 	<Frame name="InspectEquip_InfoWindow" toplevel="true" enableMouse="true" framestrata="BACKGROUND">
 		<Size x="310" y="426" />
 		<Frames>
-			<Frame name="InspectEquip_Backdrop" parent="InspectEquip_InfoWindow" inherits="BackdropTemplate" level="BACKGROUND">
+			<Frame name="InspectEquip_Backdrop" parent="InspectEquip_InfoWindow" inherits="BackdropTemplate">
 				<KeyValues>
 					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" type="global"/>
 				</KeyValues>
