@@ -254,14 +254,17 @@ local function hookCompareTip(tooltip)
 	end)
 end
 
+local function OnTooltipSetItem(tooltip, data)
+	if tooltip and tooltip.GetItem then
+		local _, link = tooltip:GetItem()
+		if link and GetItemInfo(link) then
+			IE:AddToTooltip(tooltip, link)
+		end
+	end
+end
+
 local function hookTipScript(tooltip)
 	if tooltip and tooltip.HookScript then
-		tooltip:HookScript('OnTooltipSetItem', function(tip, ...)
-			local _, link = tip:GetItem()
-			if link and GetItemInfo(link) then
-				IE:AddToTooltip(tip, link)
-			end
-		end)
 		tooltip:HookScript('OnTooltipCleared', clearTip)
 	end
 end
@@ -269,6 +272,8 @@ end
 function IE:HookTooltips()
 	if IE.tooltipsHooked then return end
 	IE.tooltipsHooked = true
+
+	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, OnTooltipSetItem)
 
 	hookTipScript(GameTooltip)
 	hookTipScript(ItemRefTooltip)
