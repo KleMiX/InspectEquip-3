@@ -40,7 +40,7 @@ function IE:InitLocalDatabase()
 	}})
 
 	local _, currentBuild = GetBuildInfo()
-	ieVersion = GetAddOnMetadata("InspectEquip", "Version")
+	ieVersion = GetAddOnMetadata("InspectEquip-3", "Version")
 
 	-- create database if not present or outdated (or wrong locale)
 	if (InspectEquipLocalDB.ClientBuild ~= currentBuild) or
