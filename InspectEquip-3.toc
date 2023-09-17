@@ -1,4 +1,4 @@
-## Interface: 100105
+## Interface: 100107
 ## Title: InspectEquip 3
 ## Notes: Shows where the equipment of inspected users or yourself is from.
 ## Notes-deDE: Zeigt an, wo die Ausrüstung betrachteter Spieler (oder deine eigene) her ist.
