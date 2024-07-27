@@ -78,7 +78,7 @@ local function createUpdateGUI()
 	end
 	barText:SetPoint("CENTER", bar, "CENTER")
 	barText:SetJustifyH("CENTER")
-	barText:SetJustifyV("CENTER")
+	barText:SetJustifyV("MIDDLE")
 	barText:SetTextColor(1, 1, 1)
 	barText:SetText("InspectEquip: " .. L["Updating database..."])
 
