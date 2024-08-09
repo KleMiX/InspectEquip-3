@@ -1,4 +1,4 @@
-## Interface: 110002
+## Interface: 110000, 110002
 ## Title: InspectEquip 3
 ## Notes: Shows where the equipment of inspected users or yourself is from.
 ## Author: emelio, gOOvER, KleMiX
