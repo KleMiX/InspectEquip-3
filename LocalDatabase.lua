@@ -40,7 +40,7 @@ function IE:InitLocalDatabase()
 	}})
 
 	local _, currentBuild = GetBuildInfo()
-	ieVersion = GetAddOnMetadata("InspectEquip-3", "Version")
+	ieVersion = C_AddOns.GetAddOnMetadata("InspectEquip-3", "Version")
 
 	-- create database if not present or outdated (or wrong locale)
 	if (InspectEquipLocalDB.ClientBuild ~= currentBuild) or
@@ -541,8 +541,8 @@ function IE:CreateLocalDatabase()
 	end
 
 	-- load encounter journal
-	if not IsAddOnLoaded("Blizzard_EncounterJournal") then
-		local loaded, reason = LoadAddOn("Blizzard_EncounterJournal")
+	if not C_AddOns.IsAddOnLoaded("Blizzard_EncounterJournal") then
+		local loaded, reason = C_AddOns.LoadAddOn("Blizzard_EncounterJournal")
 		if not loaded then
 			message("[InspectEquip] Could not load encounter journal: " .. reason)
 		end
