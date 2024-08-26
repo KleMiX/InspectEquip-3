@@ -158,9 +158,9 @@ addSource = function(tip, item, source, level)
 
 	elseif cat == "c" then -- Crafted
 		str = L["Crafted"]
-		local prof = GetSpellInfo(tonumber(next_field() or 0))
+		local prof = C_Spell.GetSpellInfo(tonumber(next_field() or 0))
 		if prof then
-			str = str .. " - " .. prof
+			str = str .. " - " .. prof.name
 		end
 
 	elseif cat == "q" then -- Quest Reward
