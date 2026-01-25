@@ -11,7 +11,7 @@
 libs\embeds.xml
 #@end-no-lib-strip@
 
-Locales\Locales.xml
+src\locales\Locales.xml
 
 ItemSources.lua
 InfoWindow.xml
