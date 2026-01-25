@@ -14,7 +14,7 @@ libs\embeds.xml
 src\locales\Locales.xml
 
 ItemSources.lua
-InfoWindow.xml
 Core.lua
 Tooltips.lua
 LocalDatabase.lua
+src\windows\Info.xml
