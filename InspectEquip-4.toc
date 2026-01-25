@@ -1,7 +1,8 @@
-## Interface: 110000, 110002
-## Title: InspectEquip 3
+## Interface: 120000
+## Title: InspectEquip 4
 ## Notes: Shows where the equipment of inspected users or yourself is from.
-## Author: emelio, gOOvER, KleMiX
+## Author: emelio, gOOvER, KleMiX, Neïla
+## Group
 ## Version: @project-version@
 ## OptionalDeps: Ace3, LibBabble-Zone-3.0, LibBabble-Boss-3.0, LibItemUpgradeInfo-1.0, Examiner, Outfitter, Links, LinkWrangler, AtlasLoot
 ## SavedVariables: InspectEquipConfig, InspectEquipLocalDB
