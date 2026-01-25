@@ -13,8 +13,8 @@ libs\embeds.xml
 
 src\locales\Locales.xml
 
-ItemSources.lua
 Core.lua
 Tooltips.lua
-LocalDatabase.lua
+src\data\ItemSources.lua
 src\windows\Info.xml
+src\data\LocalDatabase.lua
