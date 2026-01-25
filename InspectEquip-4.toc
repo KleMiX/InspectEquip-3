@@ -8,7 +8,7 @@
 ## SavedVariables: InspectEquipConfig, InspectEquipLocalDB
 
 #@no-lib-strip@
-embeds.xml
+libs\embeds.xml
 #@end-no-lib-strip@
 
 Locales\Locales.xml
