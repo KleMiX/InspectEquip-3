@@ -4,7 +4,7 @@
 ## Author: emelio, gOOvER, KleMiX, Neïla
 ## Group
 ## Version: @project-version@
-## OptionalDeps: Ace3, LibBabble-Zone-3.0, LibBabble-Boss-3.0, LibItemUpgradeInfo-1.0, Examiner, Outfitter, Links, LinkWrangler, AtlasLoot
+## OptionalDeps: Ace3, LibBabble-Zone-3.0, LibBabble-Boss-3.0, LibItemUpgradeInfo-1.0
 ## SavedVariables: InspectEquipConfig, InspectEquipLocalDB
 ## X-Curse-Project-ID: 1444745
 
