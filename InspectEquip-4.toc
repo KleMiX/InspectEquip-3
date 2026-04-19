@@ -1,0 +1,21 @@
+## Interface: 120000
+## Title: InspectEquip 4
+## Notes: Shows where the equipment of inspected users or yourself is from.
+## Author: emelio, gOOvER, KleMiX, Neïla
+## Group
+## Version: @project-version@
+## OptionalDeps: Ace3, LibBabble-Zone-3.0, LibBabble-Boss-3.0, LibItemUpgradeInfo-1.0
+## SavedVariables: InspectEquipConfig, InspectEquipLocalDB
+## X-Curse-Project-ID: 1444745
+
+#@no-lib-strip@
+libs\embeds.xml
+#@end-no-lib-strip@
+
+src\locales\Locales.xml
+
+Core.lua
+Tooltips.lua
+src\data\ItemSources.lua
+src\windows\Info.xml
+src\data\LocalDatabase.lua
