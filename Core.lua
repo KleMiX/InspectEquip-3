@@ -3,11 +3,11 @@
 InspectEquip = LibStub("AceAddon-3.0"):NewAddon("InspectEquip", "AceHook-3.0", "AceTimer-3.0", "AceEvent-3.0", "AceConsole-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("InspectEquip")
 local IE = InspectEquip
-local IS = InspectEquip_ItemSources --> ItemSources.lua
-local WIN = InspectEquip_InfoWindow --> Info.xml
-local BACK = InspectEquip_Backdrop --> Info.xml
-local TITLE = InspectEquip_BackdropTitle
-local AVGIL = InspectEquip_BackdropAvgItemLevel
+local IS
+local WIN
+local BACK
+local TITLE
+local AVGIL
 local exMod = nil
 
 local ItemUpgradeInfo = LibStub("LibItemUpgradeInfo-1.0")
@@ -51,6 +51,16 @@ local tooltipTimer = nil
 local retryTimer = nil
 
 local lastInspectedUnit = nil
+
+local function ResolveRuntimeRefs()
+	IS = IS or InspectEquip_ItemSources
+	WIN = WIN or InspectEquip_InfoWindow
+	BACK = BACK or InspectEquip_Backdrop
+	TITLE = TITLE or InspectEquip_BackdropTitle
+	AVGIL = AVGIL or InspectEquip_BackdropAvgItemLevel
+
+	return IS and WIN and BACK and TITLE and AVGIL
+end
 
 --------------------------------------------------------------------------------------
 
@@ -221,6 +231,8 @@ end
 
 function IE:OnInitialize()
 	setmetatable(InspectEquipConfig, {__index = defaults})
+
+	assert(ResolveRuntimeRefs(), "InspectEquip runtime references were not initialized")
 
 	self:SetParent(Examiner or InspectFrame)
 	WIN:Hide()

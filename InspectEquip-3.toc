@@ -13,8 +13,9 @@ libs\embeds.xml
 
 src\locales\Locales.xml
 
-Core.lua
-Tooltips.lua
 src\data\ItemSources.lua
 src\windows\Info.xml
+
+Core.lua
+Tooltips.lua
 src\data\LocalDatabase.lua
